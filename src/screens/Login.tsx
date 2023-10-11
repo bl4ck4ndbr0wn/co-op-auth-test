@@ -1,5 +1,6 @@
 import * as regex from '../constants/regex';
 
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   Button,
   ImageBackground,
@@ -9,7 +10,6 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import React, {useCallback, useEffect, useState} from 'react';
 
 import {THEME} from '../constants/theme';
 
@@ -33,8 +33,8 @@ export default function Login() {
   });
 
   const handleChange = useCallback(
-    (value) => {
-      setLogin((state) => ({...state, ...value}));
+    value => {
+      setLogin(state => ({...state, ...value}));
     },
     [setLogin],
   );
@@ -47,7 +47,7 @@ export default function Login() {
   }, [isValid, login]);
 
   useEffect(() => {
-    setIsValid((state) => ({
+    setIsValid(state => ({
       ...state,
       name: regex.username.test(login.username),
       password: regex.password.test(login.password),
@@ -71,18 +71,15 @@ export default function Login() {
             style={styles.input}
             placeholderTextColor={'#000000'}
             placeholder="Email"
-            onChangeText={(value) => handleChange({username: value})}
+            onChangeText={value => handleChange({username: value})}
           />
           <TextInput
             style={styles.input}
             placeholder="Password"
-            onChangeText={(value) => handleChange({password: value})}
+            onChangeText={value => handleChange({password: value})}
           />
 
-          <View style={styles.loginBtnWrapper}>
-            <Text style={styles.loginText}>Log In</Text>
-          </View>
-          <Button title="Left button" onPress={() => handleSignIn()} />
+          <Button title="Login" onPress={() => handleSignIn()} />
         </View>
       </ImageBackground>
     </SafeAreaView>
